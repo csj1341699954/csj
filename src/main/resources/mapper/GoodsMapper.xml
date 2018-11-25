@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.fh.shop.api.list.mapper.IGoodsMapper">
+
+    <select id="queryList" resultType="com.fh.shop.api.list.po.Goods">
+        select goodsName,price,goodsPhoto,repertory,brandId,category1,category2,category3,categoryAllName from t_goods
+    </select>
+
+
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.fh.shop.api.app.mapper.IAppMapper">
+
+   <select id="findUser" resultType="string" parameterType="string">
+      select  appsecret from  t_app where  appkey=#{value}
+   </select>
+
+
+
+  
+
+</mapper>

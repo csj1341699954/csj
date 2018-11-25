@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.fh.shop.api.add.mapper.IMembersMapper">
+
+    <select id="findMemberByUserName" parameterType="string" resultType="com.fh.shop.api.add.po.Members">
+        select
+        id,
+        userName,
+        password,
+        phone,
+        email,
+        birthday,
+        regTime,
+        lastLoginTime,
+        areas1,
+        areas2,
+        areas3,
+        areasArr
+        from t_members  where  userName=#{userName}
+    </select>
+
+
+  <insert id="addMembers" parameterType="com.fh.shop.api.add.po.Members">
+      insert into t_members
+      (
+      userName,
+      password,
+      phone,
+      email,
+      birthday,
+      regTime,
+      lastLoginTime,
+      areas1,
+      areas2,
+      areas3,
+      areasArr)values
+      (#{userName},#{password},#{phone},#{email},#{birthday},#{regTime},#{lastLoginTime},#{areas1},#{areas2},#{areas3},#{areasArr})
+  </insert>
+
+</mapper>

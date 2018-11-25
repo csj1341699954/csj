@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"  
+    xmlns:security="http://www.springframework.org/schema/security" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/tx 
+	   http://www.springframework.org/schema/tx/spring-tx.xsd 
+	   http://www.springframework.org/schema/aop 
+	   http://www.springframework.org/schema/aop/spring-aop.xsd 
+	   http://www.springframework.org/schema/mvc 
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 对项目中的所有类进行扫描以完成Bean创建并进行自动注入。  
+           支持 @Controller、@Service 以及 @Repository 和 @Component -->
+           
+	<!-- 扫描项目中com.fh.shop.controller包下所有的类，从而使类中的@Controller注解生效 -->
+    <context:component-scan base-package="com.fh.shop.api.*.controller"/>
+
+    <mvc:annotation-driven/>
+    <!--<bean class="com.fh.shop.api.list.controller.Swagger2Config"></bean>-->
+    <!--<mvc:default-servlet-handler />-->
+    <!--<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>-->
+    <!--<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>-->
+
+    
+    <!--<mvc:interceptors>-->
+      <!--<mvc:interceptor>-->
+          <!--<mvc:mapping path="/**"/>-->
+          <!--<mvc:exclude-mapping path="index.jhtml"/>-->
+          <!--<bean class="com.fh.shop.admin.interceptor.LogInterceptor"></bean>      -->
+      <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+    <!---->
+     <bean id="aecurityAspect" class="com.fh.shop.api.security.Aecurity"></bean>
+
+
+	  <aop:config>
+	  <!-- 切面 -->
+	   <aop:aspect ref="aecurityAspect">
+	   <!-- 切点  切点表达式 -->
+	     <aop:pointcut expression="execution(* com.fh.shop.api.*.controller..*.*(..))" id="pointcut"/>
+	     <!-- 通知  横切逻辑 -->
+	     <aop:around method="security" pointcut-ref="pointcut"/>
+	   </aop:aspect>
+    </aop:config>
+
+    <!--<bean id="multipartResolver"-->
+          <!--class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> &lt;!&ndash;允许上传文件大小 &ndash;&gt;-->
+        <!--<property name="maxUploadSize" value="104857600" />-->
+        <!--&lt;!&ndash;缓存大小 &ndash;&gt;-->
+        <!--<property name="maxInMemorySize" value="4096" />-->
+        <!--<property name="defaultEncoding" value="UTF-8"></property>-->
+    <!--</bean>-->
+
+</beans>

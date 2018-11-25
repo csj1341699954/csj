@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.fh.shop.api.brand.mapper.IBrandMapper">
+
+
+
+
+
+   <insert id="addBrand" parameterType="com.fh.shop.api.brand.po.Brand">
+      insert into t_brand (brandName,brandLogo,brandDsb) values(#{brandName},#{brandLogo},#{brandDsb})
+   </insert>
+
+    <delete id="delBrand" parameterType="int">
+        delete  from t_brand  where  id =#{value}
+    </delete>
+
+    <delete id="deletcBrand" parameterType="int">
+        delete  from t_brand  where  id in
+        <foreach collection="list" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <update id="updateBrand" parameterType="com.fh.shop.api.brand.po.Brand">
+        update t_brand set brandName=#{brandName},brandLogo=#{brandLogo},brandDsb=#{brandDsb} where id =#{id}
+    </update>
+
+
+</mapper>
